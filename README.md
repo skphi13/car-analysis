@@ -10,13 +10,16 @@ This project is a web application dashboard for visualizing car sales advertisem
    cd car-analysis
 
 2. Create and activate a virtual environment:
+   ```bash
     python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
 3. Install the required packages:
+   ```bash
     pip install pandas streamlit plotly-express altair
 
 4. Running the app:
+   ```bash  
     streamlit run app.py
 
 
