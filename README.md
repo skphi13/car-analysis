@@ -2,6 +2,9 @@
 
 This project is a web application dashboard for visualizing car sales advertisements using the `vehicles_us_cleaned.csv` dataset.
 
+*The URL of my app on Render:*
+https://car-analysis.onrender.com
+
 ## Installation
 
 1. Clone the repository:
@@ -21,7 +24,3 @@ This project is a web application dashboard for visualizing car sales advertisem
 4. Running the app:
    ```bash  
     streamlit run app.py
-
-
-
-
