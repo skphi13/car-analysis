@@ -2,14 +2,24 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+
 # Read the dataset’s CSV file into a Pandas DataFrame
 df = pd.read_csv('vehicles_us_cleaned.csv')
 
 # Streamlit app
-st.title('Car Sales Advertisements Analysis')
+st.title(':blue[*Car Sales Advertisements Analysis*]')
 
 # Header
 st.header('Exploratory Data Analysis')
+
+intro_text = """
+    <div style='color: #CC5500;'>
+    <p>In this project, we analyze a dataset of car sales to uncover insights about car prices, model years, conditions, and types. 
+    The dataset contains various attributes such as price, model year, condition, odometer reading, fuel type, transmission type, and more. 
+    Our goal is to explore these attributes and understand the relationships between them to provide valuable insights for potential buyers, sellers, and market analysts.</p>
+    </div>
+"""
+st.write(intro_text, unsafe_allow_html=True)
 
 # Plotly Express histograms
 st.subheader('Distribution of Car Prices')
