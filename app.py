@@ -21,26 +21,26 @@ intro_text = """
 """
 st.write(intro_text, unsafe_allow_html=True)
 
-# Plotly Express histograms
-st.subheader('Distribution of Car Prices')
-fig_price = px.histogram(df, x='price', title='Distribution of Car Prices')
-st.plotly_chart(fig_price)
-
-st.subheader('Distribution of Car Model Years')
-fig_model_year = px.histogram(df, x='model_year', title='Distribution of Car Model Years')
-st.plotly_chart(fig_model_year)
-
-# Checkbox to filter data by year
 if st.checkbox('Filter data by year'):
     year_filter = st.slider('Select Year Range', int(df['model_year'].min()), int(df['model_year'].max()), (2000, 2020))
     filtered_df = df[(df['model_year'] >= year_filter[0]) & (df['model_year'] <= year_filter[1])]
-    st.write(filtered_df)
+else:
+    filtered_df = df
 
-# Checkbox to filter data by price
 if st.checkbox('Filter data by price'):
     price_filter = st.slider('Select Price Range', int(df['price'].min()), int(df['price'].max()), (5000, 50000))
-    filtered_df = df[(df['price'] >= price_filter[0]) & (df['price'] <= price_filter[1])]
-    st.write(filtered_df)
+    filtered_df = filtered_df[(filtered_df['price'] >= price_filter[0]) & (filtered_df['price'] <= price_filter[1])]
+
+# Updated charts
+st.subheader('Distribution of Car Prices')
+fig_price = px.histogram(filtered_df, x='price', color='condition', hover_data=filtered_df.columns, title='Distribution of Car Prices by Condition')
+fig_price.update_xaxes(categoryorder='total descending')
+st.plotly_chart(fig_price)
+
+st.subheader('Distribution of Car Model Years')
+fig_model_year = px.histogram(filtered_df, x='model_year', color='type', hover_data=filtered_df.columns, title='Distribution of Car Model Years by Type')
+fig_model_year.update_xaxes(categoryorder='total descending')
+st.plotly_chart(fig_model_year)
 
 # Checkbox to show distribution of car conditions
 if st.checkbox('Show distribution of car conditions'):
@@ -50,11 +50,11 @@ if st.checkbox('Show distribution of car conditions'):
 
 # Plotly Express scatter plots
 st.subheader('Price vs. Odometer')
-fig_price_odometer = px.scatter(df, x='odometer', y='price', title='Price vs. Odometer')
+fig_price_odometer = px.scatter(filtered_df, x='odometer', y='price', color='condition', trendline='ols', title='Price vs. Odometer by Condition')
 st.plotly_chart(fig_price_odometer)
 
 st.subheader('Price vs. Model Year')
-fig_price_model_year = px.scatter(df, x='model_year', y='price', title='Price vs. Model Year')
+fig_price_model_year = px.scatter(filtered_df, x='model_year', y='price', color='type', trendline='ols', title='Price vs. Model Year by Type')
 st.plotly_chart(fig_price_model_year)
 
 # Checkbox to show price vs. condition
